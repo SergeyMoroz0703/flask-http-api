@@ -33,7 +33,7 @@ def get():
         else:
             return make_response(jsonify({'error': 'Not found user with {value}'.format(value=dict_to_search)}), 404)
 
-    cursor = mongo.db.users.find(dict_to_search).limit(20)
+    cursor = mongo.db.users.find(dict_to_search).limit(80)
     if cursor.count() > 0:
         for user in cursor:
             data.append({'id': str(user['_id']), 'name': user['name'],

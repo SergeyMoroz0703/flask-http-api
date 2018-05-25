@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# GET /createcm?summary=vvv&change=bbb HTTP/1.1
+
 from bson import ObjectId
 from flask import Flask
 from flask import jsonify, request, make_response

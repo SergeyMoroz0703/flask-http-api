@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # GET /createcm?summary=vvv&change=bbb HTTP/1.1
-
+from bson import ObjectId
 from flask import Flask
 from flask import jsonify, request, make_response
 from flask_pymongo import PyMongo
@@ -23,12 +23,22 @@ def get():
             value = False
         dict_to_search[key] = value
 
+    if 'id' in dict_to_search:
+        cursor = mongo.db.users.find({'_id': ObjectId(dict_to_search['id'])})
+        if cursor.count() > 0:
+            for user in cursor:
+                data.append({'id': str(user['_id']), 'name': user['name'],
+                         'surname': user['surname'], 'online': user['online']})
+            return jsonify({'status': 'ok', 'data': data})
+        else:
+            return make_response(jsonify({'error': 'Not found user with {value}'.format(value=dict_to_search)}), 404)
+
     cursor = mongo.db.users.find(dict_to_search).limit(20)
     if cursor.count() > 0:
         for user in cursor:
-            data.append({"id": str(user['_id']), "name": user['name'],
-                         "surname": user['surname'], "online": user['online']})
-        return jsonify({"status": "ok", "data": data})
+            data.append({'id': str(user['_id']), 'name': user['name'],
+                         'surname': user['surname'], 'online': user['online']})
+        return jsonify({'status': 'ok', 'data': data})
     else:
         return make_response(jsonify({'error': 'Not found user with {value}'.format(value=dict_to_search)}), 404)
 

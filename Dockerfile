@@ -26,8 +26,9 @@ RUN rm -rf /tmp/Python-3.5.0.tar.xz /tmp/Python-3.5.0
 
 ADD requirements.txt /flask-http-api/requirements.txt
 ADD httpapi.py /flask-http-api/httpapi.py
+EXPOSE 80
 
 RUN pip3 install -r requirements.txt
 CMD ["mongod"]
-CMD ["python3 httpapy.py"]
+CMD ["python3","httpapi.py"]
 

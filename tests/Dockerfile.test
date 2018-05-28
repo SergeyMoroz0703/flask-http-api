@@ -1,0 +1,8 @@
+FROM python:3.5
+
+WORKDIR /flask-http-api/tests
+ADD . /flask-http-api/tests
+
+RUN pip3 install -r /flask-http-api/tests/test-requirements.txt
+
+CMD ["python3","test_users_api.py"]

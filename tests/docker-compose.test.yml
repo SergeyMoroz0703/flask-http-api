@@ -1,0 +1,10 @@
+test_env:
+  build: .
+  dockerfile: Dockerfile.test
+  links:
+    - flask-mongodb-api
+flask-mongodb-api:
+  build: ../
+  dockerfile: Dockerfile
+
+

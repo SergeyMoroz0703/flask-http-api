@@ -19,14 +19,13 @@ RUN ./configure
 RUN make
 RUN make install
 
-WORKDIR /docker-for-http
+WORKDIR /flask-http-api
 # Remove python source
 RUN rm -rf /tmp/Python-3.5.0.tar.xz /tmp/Python-3.5.0
 
 
-ADD requirements.txt /docker-for-http/requirements.txt
-ADD httpapi.py /docker-for-http/httpapi.py
-ADD test_users_api.py /docker-for-http/test_users_api.py
+ADD requirements.txt /flask-http-api/requirements.txt
+ADD httpapi.py /flask-http-api/httpapi.py
 
 RUN pip3 install -r requirements.txt
 CMD ["mongod"]

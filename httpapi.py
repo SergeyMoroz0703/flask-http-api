@@ -79,7 +79,7 @@ def post():
     data = {'id': str(new_user_id['_id']), 'name': new_user_id['name'],
             'surname': new_user_id['surname'], 'online': new_user_id['online']}
 
-    return make_response(jsonify({'resultф': data}), 201)
+    return make_response(jsonify({'result': data}), 201)
 
 
 if __name__ == '__main__':

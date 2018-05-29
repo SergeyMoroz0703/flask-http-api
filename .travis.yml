@@ -10,7 +10,7 @@ install:
   - pip install -r tests/test-requirements.txt
 
 before_script:
-  - python httpapi.py &
+  - python httpapi.py >> logs/server.log
   - sleep 5
 
 
@@ -18,4 +18,4 @@ script:
   - python tests/test_users_api.py
 
 after_failure:
-  - cat logs/server_log.txt
+  - cat logs/server.log

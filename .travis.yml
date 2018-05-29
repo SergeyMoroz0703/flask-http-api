@@ -14,7 +14,7 @@ install:
 jobs:
   include:
     - stage: run server
-    - script: python httpapi.py
+      script: python httpapi.py
 
     - stage: run tests
-    - script: python tests/test_users_api.py
+      script: python tests/test_users_api.py

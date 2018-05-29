@@ -10,7 +10,8 @@ install:
   - pip install -r tests/test-requirements.txt
 
 before_script:
-  - python httpapi.py &
+  - python httpapi.py >> server_log.txt 2>&1  &
+
 
 script:
   - python tests/test_users_api.py

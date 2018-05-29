@@ -1,15 +1,16 @@
 dist: trusty
 
 services: mongodb
-
 language: python
 python:
   - 3.5
 
 install:
-  - pip3 install -r requirements.txt
-  - pip3 install -r tests/test-requirements.txt
+  - pip install -r requirements.txt
+  - pip install -r tests/test-requirements.txt
+
+before_script:
+  - python httpapi.py
 
 script:
-  - python3 httpapi.py
-  - python3 tests/test_users_api.py
+  - python tests/test_users_api.py

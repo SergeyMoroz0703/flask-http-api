@@ -11,6 +11,7 @@ install:
 
 before_script:
   - python httpapi.py >> server_log.txt 2>&1  &
+  - sleep 3
 
 
 script:

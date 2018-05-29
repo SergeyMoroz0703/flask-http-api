@@ -4,6 +4,10 @@ Here provided easy HTTP API wich support GET, POST method requests. I'm going to
 API works with Mongo database, namely with `users_db` <br>
 
 ----
+### CI <br>
+Travis CI: [![Build Status](https://travis-ci.org/SergeyMoroz0703/flask-mongoDB-http-api.svg?branch=master)](https://travis-ci.org/SergeyMoroz0703/flask-mongoDB-http-api) <br>
+
+----
 Example of GET request for one user: <br> `localhost:5000/users?name=James&surname=Bond&online=false` or <br>
 `requests.get(url='localhost:5000', params={"name": "James", "surname": "Bond", "online": "False"})` <br>
 To get all users from database just send GET request with payload {}. <br>

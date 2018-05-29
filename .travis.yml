@@ -14,8 +14,9 @@ install:
 jobs:
   include:
     - stage: run server
-      script: python httpapi.py >> logs/server_log.txt 2>&1
+      before_script: touch server_log.txt
+      script: python httpapi.py >> server_log.txt
 
     - stage: run tests
       script: python tests/test_users_api.py
-      script: cat logs/server_log.txt
+      script: cat server_log.txt

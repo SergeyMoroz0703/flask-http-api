@@ -15,7 +15,7 @@ jobs:
   include:
     - stage: run server
       before_script: touch server_log.txt
-      script: python httpapi.py >> server_log.txt 2>&1
+      script: python httpapi.py >> server_log.txt 2>&1 &
 
     - stage: run tests
       script: python tests/test_users_api.py

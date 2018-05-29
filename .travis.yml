@@ -9,14 +9,13 @@ install:
   - pip install -r requirements.txt
   - pip install -r tests/test-requirements.txt
 
+before_script:
+  - python httpapi.py >> logs/server_log.txt 2>&1  &
+  - sleep 3
 
 
-jobs:
-  include:
-    - stage: run server
-      before_script: touch server_log.txt
-      script: python httpapi.py >> server_log.txt 2>&1 &
+script:
+  - python tests/test_users_api.py
 
-    - stage: run tests
-      script: python tests/test_users_api.py
-      script: cat server_log.txt
+after_failure:
+  - cat logs/server_log.txt

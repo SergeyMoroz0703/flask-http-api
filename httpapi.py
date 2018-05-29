@@ -4,12 +4,30 @@ from bson import ObjectId
 from flask import Flask
 from flask import jsonify, request, make_response
 from flask_pymongo import PyMongo
+from time import strftime
+from logging.handlers import RotatingFileHandler
+import logging
 import re
 
 app = Flask(__name__)
 app.config['MONGO_DBNAME'] = 'users_db'
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/users_db'
 mongo = PyMongo(app)
+
+
+@app.after_request
+def after_request(response):
+    """ Logging after every request. """
+    if response.status_code != 500:
+        ts = strftime('[%Y-%b-%d %H:%M]')
+        logger.error('%s %s %s %s %s %s',
+                      ts,
+                      request.remote_addr,
+                      request.method,
+                      request.scheme,
+                      request.full_path,
+                      response.status)
+    return response
 
 
 @app.route('/users', methods=['GET'])
@@ -33,7 +51,7 @@ def get():
         else:
             return make_response(jsonify({'error': 'Not found user with {value}'.format(value=dict_to_search)}), 404)
 
-    cursor = mongo.db.users.find(dict_to_search).limit(80)
+    cursor = mongo.db.users.find(dict_to_search).limit(100)
     if cursor.count() > 0:
         for user in cursor:
             data.append({'id': str(user['_id']), 'name': user['name'],
@@ -65,4 +83,8 @@ def post():
 
 
 if __name__ == '__main__':
+    handler = RotatingFileHandler('app.log', maxBytes=10000, backupCount=3)
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.ERROR)
+    logger.addHandler(handler)
     app.run(debug=True)

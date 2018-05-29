@@ -10,7 +10,7 @@ install:
   - pip install -r tests/test-requirements.txt
 
 before_script:
-  - python httpapi.py 2>&1  &
+  - screen -dmS api python httpapi.py
   - sleep 5
 
 

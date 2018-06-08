@@ -2,9 +2,11 @@ test_env:
   build: .
   dockerfile: Dockerfile.test
   links:
-    - flask-mongodb-api
-flask-mongodb-api:
+    - httpapi
+httpapi:
   build: ../
   dockerfile: Dockerfile
-
-
+  links:
+    - mongo
+mongo:
+  image: mongo:latest

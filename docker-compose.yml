@@ -1,5 +1,9 @@
-flask-mongodb-api:
+httpapi:
   build: .
   dockerfile: Dockerfile
+  links:
+    - mongo
   ports:
-    - "80:5000"
+    - "5000:5000"
+mongo:
+  image: mongo:latest

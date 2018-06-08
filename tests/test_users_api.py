@@ -11,7 +11,7 @@ class TestApiFunctionality(unittest.TestCase):
 
     def __init__(self, *a, **kw):
         super(TestApiFunctionality, self).__init__(*a, **kw)
-        self.host = 'flask-mongodb-api:5000'
+        self.host = '127.0.0.1:5000'
         self.db_url = 'users'
         self.url = 'http://{}/{}'.format(self.host, self.db_url)
 
